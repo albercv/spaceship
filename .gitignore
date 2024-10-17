@@ -1,0 +1,64 @@
+# Eclipse / IntelliJ IDEA project files
+/.idea/
+/*.iml
+*.class
+*.log
+*.jar
+*.war
+*.ear
+
+# Maven specific
+/target/
+/pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+logs
+*.log
+spring.log
+
+# Temporary files
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# H2 Database files
+*.mv.db
+*.trace.db
+
+# Redis dump
+dump.rdb
+
+# Docker
+**/Dockerfile
+**/docker-compose.yml
+**/*.orig
+/.docker
+
+# IntelliJ IDEA specific
+.idea
+*.iws
+*.ipr
+
+# System files
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Others
+.vscode/
+.env
+
