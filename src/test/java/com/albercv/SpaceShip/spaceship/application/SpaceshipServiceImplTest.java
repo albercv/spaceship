@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,15 +39,19 @@ class SpaceshipServiceImplTest {
 
         Spaceship spaceship1 = new Spaceship(1L, "X-Wing", "T-65", "Incom Corporation", 1, 0);
         Spaceship spaceship2 = new Spaceship(2L, "Millennium Falcon", "YT-1300", "Corellian Engineering", 4, 6);
+
         List<Spaceship> spaceshipList = Arrays.asList(spaceship1, spaceship2);
+        Pageable pageable = PageRequest.of(0, 2);
+        Page<Spaceship> page = new PageImpl<>(spaceshipList, pageable, spaceshipList.size());
 
-        when(spaceshipRepository.findAll()).thenReturn(spaceshipList);
 
-        List<Spaceship> result = spaceshipService.getAllSpaceships();
+        when(spaceshipRepository.findAll(pageable)).thenReturn(page);
 
-        assertEquals(2, result.size());
-        assertEquals("X-Wing", result.getFirst().getName());
-        verify(spaceshipRepository, times(1)).findAll();
+        Page<Spaceship> result = spaceshipService.getAllSpaceships(pageable);
+
+        assertEquals(2, result.getContent().size());
+        assertEquals("X-Wing", result.getContent().getFirst().getName());
+        verify(spaceshipRepository, times(1)).findAll(pageable);
     }
 
     @Test

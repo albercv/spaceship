@@ -2,6 +2,10 @@ package com.albercv.SpaceShip.spaceship.infraestructure.api;
 
 import com.albercv.SpaceShip.spaceship.application.port.SpaceshipService;
 import com.albercv.SpaceShip.spaceship.domain.Spaceship;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +23,13 @@ public class SpaceshipRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Spaceship>> getAllSpaceships() {
-        List<Spaceship> spaceships = spaceshipService.getAllSpaceships();
+    public ResponseEntity<Page<Spaceship>> getAllSpaceships(@RequestParam(defaultValue = "0") int page,
+                                                            @RequestParam(defaultValue = "10") int size,
+                                                            @RequestParam(defaultValue = "id,asc") String[] sort) {
+        Sort.Direction direction = Sort.Direction.fromString(sort[1]);
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sort[0]));
+
+        Page<Spaceship> spaceships = spaceshipService.getAllSpaceships(pageable);
         return new ResponseEntity<>(spaceships, HttpStatus.OK);
     }
 

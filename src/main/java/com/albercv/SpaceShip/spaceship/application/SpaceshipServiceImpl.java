@@ -4,6 +4,8 @@ import com.albercv.SpaceShip.spaceship.application.port.SpaceshipService;
 import com.albercv.SpaceShip.spaceship.domain.Spaceship;
 import com.albercv.SpaceShip.spaceship.domain.port.SpaceshipRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,8 +19,8 @@ public class SpaceshipServiceImpl implements SpaceshipService {
     }
 
     @Override
-    public List<Spaceship> getAllSpaceships() {
-        return spaceshipRepository.findAll();
+    public Page<Spaceship> getAllSpaceships(Pageable pageable) {
+        return spaceshipRepository.findAll(pageable);
     }
 
     @Override
