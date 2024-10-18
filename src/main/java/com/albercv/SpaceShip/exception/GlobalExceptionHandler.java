@@ -48,4 +48,13 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(DatabaseException.class)
+    public ResponseEntity<Object> handleDatabaseException(DatabaseException ex, WebRequest request) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("error", "Database Error");
+        body.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
