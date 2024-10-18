@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "2ddf9b97-7522-40cf-8e27-f8951f5ecffe",
+		"name": "Spaceship",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13957890"
+	},
+	"item": [
+		{
+			"name": "getWithName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/spaceships?name=Ga&page=0&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"spaceships"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ga"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/spaceships/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"spaceships",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/spaceships",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"spaceships"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Otro Falcon\",\n  \"model\": \"YT-1300\",\n  \"manufacturer\": \"Corellian Engineering\",\n  \"crewCapacity\": 4,\n  \"passengerCapacity\": 6\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/spaceships",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"spaceships"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"X-Wing\",\n  \"model\": \"T-65\",\n  \"manufacturer\": \"Incom Corporation\",\n  \"crewCapacity\": 1,\n  \"passengerCapacity\": 0\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/spaceships/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"spaceships",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NotFoundError",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/spaceships/9999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"spaceships",
+						"9999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MismatchError",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/spaceships/invalid-idp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"spaceships",
+						"invalid-idp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/spaceships/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"spaceships",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "negative",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/spaceships/-5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"spaceships",
+						"-5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
