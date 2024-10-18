@@ -23,4 +23,5 @@ public class Spaceship {
     private String manufacturer;
     private int crewCapacity;
     private int passengerCapacity;
+
 }

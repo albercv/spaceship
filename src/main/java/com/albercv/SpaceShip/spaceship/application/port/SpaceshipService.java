@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface SpaceshipService {
 
-    Page<Spaceship> getAllSpaceships(Pageable pageable);
+    Page<Spaceship> getAllSpaceships(Optional<String> name, Pageable pageable);
 
     Optional<Spaceship> getSpaceshipById(Long id);
 

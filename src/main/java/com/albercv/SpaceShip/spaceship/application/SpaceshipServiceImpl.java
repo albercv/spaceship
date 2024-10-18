@@ -19,8 +19,9 @@ public class SpaceshipServiceImpl implements SpaceshipService {
     }
 
     @Override
-    public Page<Spaceship> getAllSpaceships(Pageable pageable) {
-        return spaceshipRepository.findAll(pageable);
+    public Page<Spaceship> getAllSpaceships(Optional<String> name, Pageable pageable) {
+        return name.map(n -> spaceshipRepository.findByNameContainingIgnoreCase(n, pageable))
+                .orElseGet(() -> spaceshipRepository.findAll(pageable));
     }
 
     @Override

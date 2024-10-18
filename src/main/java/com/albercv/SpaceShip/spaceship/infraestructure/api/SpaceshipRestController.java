@@ -23,13 +23,15 @@ public class SpaceshipRestController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Spaceship>> getAllSpaceships(@RequestParam(defaultValue = "0") int page,
-                                                            @RequestParam(defaultValue = "10") int size,
-                                                            @RequestParam(defaultValue = "id,asc") String[] sort) {
+    public ResponseEntity<Page<Spaceship>> getAllSpaceships(
+            @RequestParam(required = false) String name,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id,asc") String[] sort) {
         Sort.Direction direction = Sort.Direction.fromString(sort[1]);
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sort[0]));
 
-        Page<Spaceship> spaceships = spaceshipService.getAllSpaceships(pageable);
+        Page<Spaceship> spaceships = spaceshipService.getAllSpaceships(Optional.ofNullable(name), pageable);
         return new ResponseEntity<>(spaceships, HttpStatus.OK);
     }
 
