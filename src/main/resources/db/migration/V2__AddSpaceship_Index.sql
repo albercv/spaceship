@@ -1,0 +1,1 @@
+CREATE INDEX idx_spaceship_name ON spaceship(name);
