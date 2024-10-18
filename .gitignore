@@ -42,8 +42,6 @@ Thumbs.db
 dump.rdb
 
 # Docker
-**/Dockerfile
-**/docker-compose.yml
 **/*.orig
 /.docker
 

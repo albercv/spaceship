@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+      - rabbitmq
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:spaceshipdb
+      SPRING_DATASOURCE_USERNAME: captain
+      SPRING_DATASOURCE_PASSWORD: totheinfiniteandbeyond
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_CACHE_TYPE: simple
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+    command: sh -c "while ! nc -z rabbitmq 5672; do sleep 2; done; ./mvnw spring-boot:run"
+    networks:
+      - app-network
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: buzz
+      RABBITMQ_DEFAULT_PASS: lightyear
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
