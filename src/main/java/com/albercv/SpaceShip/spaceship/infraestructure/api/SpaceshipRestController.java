@@ -1,5 +1,6 @@
 package com.albercv.SpaceShip.spaceship.infraestructure.api;
 
+import com.albercv.SpaceShip.exception.CustomNotFoundException;
 import com.albercv.SpaceShip.spaceship.application.port.SpaceshipService;
 import com.albercv.SpaceShip.spaceship.domain.Spaceship;
 import org.springframework.data.domain.Page;
@@ -38,8 +39,9 @@ public class SpaceshipRestController {
     @GetMapping("/{id}")
     public ResponseEntity<Spaceship> getSpaceshipById(@PathVariable Long id) {
         Optional<Spaceship> spaceship = spaceshipService.getSpaceshipById(id);
-        return spaceship.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return spaceship
+                .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseThrow(() -> new CustomNotFoundException("Spaceship with ID " + id + " not found."));
     }
 
     @PostMapping
